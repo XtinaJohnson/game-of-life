@@ -30,9 +30,9 @@ def get_next_state(state, live_neighbors):
             next_state = 1  # becomes alive (reproduction)
     return(next_state)
 
-def get_neighbors_top_left_corner(grid, i, j, n):
+def get_neighbors_top_left_corner(grid, i, j, n, m):
     live_neighbors = 0
-    if grid[n - 1, j] == 1:  # up (wrap)
+    if grid[m - 1, j] == 1:  # up (wrap)
         live_neighbors += 1
     if grid[i, n - 1] == 1:  # left (wrap)
         live_neighbors += 1
@@ -46,8 +46,9 @@ def get_neighbors_top_left_corner(grid, i, j, n):
 
 # Create an inital 2-D array, size n * n, for testing.
 n = 5
-arr = np.array(np.arange(n * n))
-grid = np.reshape(a=arr, newshape=(n, n))
+m = 5
+arr = np.array(np.arange(n * m))
+grid = np.reshape(a=arr, newshape=(n, m))
 print(grid)
 
 # np.ndenumerate() gets the index and value of each grid item! Useful.
@@ -59,7 +60,7 @@ for idx, val in np.ndenumerate(grid):
         if j == 0:
             print("Top-left corner:")
             print(i, j, val)
-            live_neighbors = get_neighbors_top_left_corner(grid, i, j, n)
+            live_neighbors = get_neighbors_top_left_corner(grid, i, j, n, m)
             print("live neighbors:", live_neighbors)
             
         elif j == n - 1:
