@@ -1,5 +1,14 @@
 import numpy as np
 
+
+# Set to True to see debugging messages.
+verbose = True
+
+# Print debugging messages.
+def show(s):
+    if verbose:
+        print(s)
+
 # Create the initial 2-D array with random "live" (1) and "dead" (0) cells.
 # The random sample is generated from elements of a.
 # size is actually the output shape, with n * n samples drawn.
@@ -32,17 +41,194 @@ def get_next_state(state, live_neighbors):
 
 def get_neighbors_top_left_corner(grid, i, j, n, m):
     live_neighbors = 0
-    if grid[m - 1, j] == 1:  # up (wrap)
+    up = grid[m - 1, j]
+    left = grid[i, n - 1]
+    down = grid[i + 1, j]
+    right = grid[i, j + 1]
+    if up == 1:  # up (wrap)
         live_neighbors += 1
-    if grid[i, n - 1] == 1:  # left (wrap)
+    if left == 1:  # left (wrap)
         live_neighbors += 1
-    if grid[i + 1, j] == 1:  # down
+    if down == 1:  # down
         live_neighbors += 1
-    if grid[i, j + 1] == 1:  # right
+    if right == 1:  # right
         live_neighbors += 1
+    print(grid)
+    print("up:", up)
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
     return(live_neighbors)
 
+def get_neighbors_top_right_corner(grid, i, j, n, m):
+    live_neighbors = 0
+    up = grid[m - 1, j]
+    left = grid[i, j - 1]
+    down = grid[i + 1, j]
+    right = grid[i, 0]
+    if up == 1:
+        live_neighbors += 1
+    if left == 1:
+        live_neighbors += 1
+    if down == 1:
+        live_neighbors += 1
+    if right == 1: 
+        live_neighbors += 1
+    print(grid)
+    print("up:", up) 
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
+    return(live_neighbors)
+
+def get_neighbors_bottom_left_corner(grid, i, j, n, m):
+    live_neighbors = 0
+    up = grid[i - 1, j]
+    left = grid[i, n - 1]
+    down = grid[0, 0]
+    right = grid[i, j + 1]
+    if up == 1:
+        live_neighbors += 1
+    if left == 1:
+        live_neighbors += 1
+    if down == 1:
+        live_neighbors += 1
+    if right == 1:
+        live_neighbors += 1
+    print(grid)
+    print("up:", up)
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
+    return(live_neighbors)
+    
+    
+def get_neighbors_bottom_right_corner(grid, i, j, n, m):
+    live_neighbors = 0
+    up = grid[i - 1, j]
+    left = grid[i, j - 1]
+    down = grid[0, j]
+    right = grid[m - 1, 0]
+    if up == 1:
+        live_neighbors += 1
+    if left == 1:
+        live_neighbors += 1
+    if down == 1:
+        live_neighbors += 1
+    if right == 1:
+        live_neighbors += 1
+    print(grid)
+    print("up:", up)
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
+    return(live_neighbors)
+
+
+def get_neighbors_top_row(grid, i, j, n, m):  # consider that i is 0 in the top row...
+    live_neighbors = 0
+    up = grid[m - 1, j]
+    left = grid[0, j - 1]
+    down = grid[i + 1, j]
+    right = grid[0, j + 1]
+    if up == 1:
+        live_neighbors += 1
+    if left == 1:
+        live_neighbors += 1
+    if down == 1:
+        live_neighbors += 1
+    if right == 1:
+        live_neighbors += 1
+    print(grid)
+    print("up:", up)
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
+    return(live_neighbors)
         
+def get_neighbors_bottom_row(grid, i, j, n, m):
+    live_neighbors = 0
+    up = grid[i - 1, j]
+    left = grid[i, j - 1]
+    down = grid[0, j]
+    right = grid[i, j + 1]
+    if up == 1:
+        live_neighbors += 1
+    if left == 1:
+        live_neighbors += 1
+    if down == 1:
+        live_neighbors += 1
+    if right == 1:
+        live_neighbors += 1
+    print(grid)
+    print("up:", up)
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
+    return(live_neighbors)
+
+def get_neighbors_left_column(grid, i, j, n, m):
+    live_neighbors = 0
+    up = grid[i - 1, j]
+    left = grid[i, n - 1]
+    down = grid[i + 1, j]
+    right = grid[i, j + 1]
+    if up == 1:
+        live_neighbors += 1
+    if left == 1:
+        live_neighbors += 1
+    if down == 1:
+        live_neighbors += 1
+    if right == 1:
+        live_neighbors += 1
+    print(grid)
+    print("up:", up)
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
+    return(live_neighbors)
+
+def get_neighbors_right_column(grid, i, j, n, m):
+    live_neighbors = 0
+    up = grid[i - 1, j]
+    left = grid[i, j - 1]
+    down = grid[i + 1, j]
+    right = grid[i, 0]
+    if up == 1:
+        live_neighbors += 1
+    if left == 1:
+        live_neighbors += 1
+    if down == 1:
+        live_neighbors += 1
+    if right == 1:
+        live_neighbors += 1
+    print(grid)
+    print("up:", up)
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
+    return(live_neighbors)
+
+def get_neighbors_body(grid, i, j, n, m):
+    live_neighbors = 0
+    up = grid[i - 1, j]
+    left = grid[i, j - 1]
+    down = grid[i + 1, j]
+    right = grid[i, j + 1]
+    if up == 1:
+        live_neighbors += 1
+    if left == 1:
+        live_neighbors += 1
+    if down == 1:
+        live_neighbors += 1
+    if right == 1:
+        live_neighbors += 1
+    print(grid)
+    print("up:", up)
+    print("left:", left)
+    print("down:", down)
+    print("right:", right)
+    return(live_neighbors)
 
 # Create an inital 2-D array, size n * n, for testing.
 n = 5
@@ -66,28 +252,44 @@ for idx, val in np.ndenumerate(grid):
         elif j == n - 1:
             print("Top-right corner:")
             print(i, j, val)
+            live_neighbors = get_neighbors_top_right_corner(grid, i, j, n, m)
+            print("live neighbors:", live_neighbors)
         else: 
             print("Top row (non-corners):")
             print(i, j, val)
-    elif i == n - 1:  # bottom row with corners
+            live_neighbors = get_neighbors_top_row(grid, i, j, n, m)
+            print("live neighbors:", live_neighbors)
+    elif i == m - 1:  # bottom row with corners
         if j == 0:
             print("Bottom-left corner:")
             print(i, j, val)
+            live_neighbors = get_neighbors_bottom_left_corner(grid, i, j, n, m)
+            print("live neighbors:", live_neighbors)
         elif j == n - 1:
             print("Bottom-right corner:")
             print(i, j, val)
+            live_neighbors = get_neighbors_bottom_right_corner(grid, i, j, n, m)
+            print("live neighbors:", live_neighbors)
         else:
             print("Bottom row (non-corners):")
             print(i, j, val)
+            live_neighbors = get_neighbors_bottom_row(grid, i, j, n, m)
+            print("live neighbors:", live_neighbors)
     elif j == 0:
         print("Left column (non-corners):")
         print(i, j, val)
+        live_neighbors = get_neighbors_left_column(grid, i, j, n, m)
+        print("live neighbors:", live_neighbors)
     elif j == n - 1:
         print("Right column (non-corners):")
         print(i, j, val)
+        live_neighbors = get_neighbors_right_column(grid, i, j, n, m)
+        print("live neighbors:", live_neighbors)
     else:
         print("Body:")
         print(i, j, val)
+        live_neighbors = get_neighbors_body(grid, i, j, n, m)
+        print("live neighbors:", live_neighbors)
 
   
 
