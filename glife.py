@@ -136,19 +136,6 @@ def get_neighbors_body(grid, i, j):
     right = grid[i, j + 1]
     return(up, left, down, right)
 
-# Create the initial 2-D array with random "live" (1) and "dead" (0) cells.
-# The random sample is generated from elements of a.
-# size is actually the output shape, with row * col samples drawn.
-row = 3
-col = 4
-grid = np.random.choice(a=np.array([0, 1]), size=(row, col))
-# arr = np.array(np.arange(row * col))
-# grid = np.reshape(a=arr, newshape=(row, col))
-print(grid)
-
-# Create an empty grid to be populated.
-new_grid = np.full(shape=(row, col), fill_value=7)
-print(new_grid)
 
 
 def change_grid(grid):
@@ -159,106 +146,132 @@ def change_grid(grid):
         # print(i, j, val)
         if i == 0:  # top row with corners
             if j == 0:
-                print("Top-left corner:")
-                print(i, j, val)
+                # print("Top-left corner:")
+                # print(i, j, val)
                 up, down, left, right = get_neighbors_top_left_corner(grid, i, j)
-                print_neighbors(up, down, left, right)
+                # print_neighbors(up, down, left, right)
                 live_neighbors = count_neighbors(up, down, left, right)
-                print("live neighbors:", live_neighbors)
+                # print("live neighbors:", live_neighbors)
                 next_state = get_next_state(val, live_neighbors)
-                print("next state:", next_state)
+                # print("next state:", next_state)
                 new_grid[i, j] = next_state
-                print(new_grid)
+                # print(new_grid)
                 
             elif j == col - 1:
-                print("Top-right corner:")
-                print(i, j, val)
+                # print("Top-right corner:")
+                # print(i, j, val)
                 up, down, left, right = get_neighbors_top_right_corner(grid, i, j)
-                print_neighbors(up, down, left, right)
+                # print_neighbors(up, down, left, right)
                 live_neighbors = count_neighbors(up, down, left, right)
-                print("live neighbors:", live_neighbors)
+                # print("live neighbors:", live_neighbors)
                 next_state = get_next_state(val, live_neighbors)
-                print("next state:", next_state)
+                # print("next state:", next_state)
                 new_grid[i, j] = next_state
-                print(new_grid)
+                # print(new_grid)
             else: 
-                print("Top row (non-corners):")
-                print(i, j, val)
+                # print("Top row (non-corners):")
+                # print(i, j, val)
                 up, down, left, right = get_neighbors_top_row(grid, i, j)
-                print_neighbors(up, down, left, right)
+                # print_neighbors(up, down, left, right)
                 live_neighbors = count_neighbors(up, down, left, right)
-                print("live neighbors:", live_neighbors)
+                # print("live neighbors:", live_neighbors)
                 next_state = get_next_state(val, live_neighbors)
-                print("next state:", next_state)
+                # print("next state:", next_state)
                 new_grid[i, j] = next_state
-                print(new_grid)
+                # print(new_grid)
         elif i == row - 1:  # bottom row with corners
             if j == 0:
-                print("Bottom-left corner:")
-                print(i, j, val)
+                # print("Bottom-left corner:")
+                # print(i, j, val)
                 up, down, left, right = get_neighbors_bottom_left_corner(grid, i, j)
-                print_neighbors(up, down, left, right)
+                # print_neighbors(up, down, left, right)
                 live_neighbors = count_neighbors(up, down, left, right)
-                print("live neighbors:", live_neighbors)
+                # print("live neighbors:", live_neighbors)
                 next_state = get_next_state(val, live_neighbors)
-                print("next state:", next_state)
+                # print("next state:", next_state)
                 new_grid[i, j] = next_state
-                print(new_grid)
+                # print(new_grid)
             elif j == col - 1:
-                print("Bottom-right corner:")
-                print(i, j, val)
+                # print("Bottom-right corner:")
+                # print(i, j, val)
                 up, down, left, right = get_neighbors_bottom_right_corner(grid, i, j)
-                print_neighbors(up, down, left, right)
+                # print_neighbors(up, down, left, right)
                 live_neighbors = count_neighbors(up, down, left, right)
-                print("live neighbors:", live_neighbors)
+                # print("live neighbors:", live_neighbors)
                 next_state = get_next_state(val, live_neighbors)
-                print("next state:", next_state)
+                # print("next state:", next_state)
                 new_grid[i, j] = next_state
-                print(new_grid)
+                # print(new_grid)
             else:
-                print("Bottom row (non-corners):")
-                print(i, j, val)
+                # print("Bottom row (non-corners):")
+                # print(i, j, val)
                 up, down, left, right = get_neighbors_bottom_row(grid, i, j)
-                print_neighbors(up, down, left, right)
+                # print_neighbors(up, down, left, right)
                 live_neighbors = count_neighbors(up, down, left, right)
-                print("live neighbors:", live_neighbors)
+                # print("live neighbors:", live_neighbors)
                 next_state = get_next_state(val, live_neighbors)
-                print("next state:", next_state)
+                # print("next state:", next_state)
                 new_grid[i, j] = next_state
-                print(new_grid)
+                # print(new_grid)
         elif j == 0:
-            print("Left column (non-corners):")
-            print(i, j, val)
+            # print("Left column (non-corners):")
+            # print(i, j, val)
             up, down, left, right = get_neighbors_left_column(grid, i, j)
-            print_neighbors(up, down, left, right)
+            # print_neighbors(up, down, left, right)
             live_neighbors = count_neighbors(up, down, left, right)
-            print("live neighbors:", live_neighbors)
+            # print("live neighbors:", live_neighbors)
             next_state = get_next_state(val, live_neighbors)
-            print("next state:", next_state)
+            # print("next state:", next_state)
             new_grid[i, j] = next_state
-            print(new_grid)
+            # print(new_grid)
         elif j == col - 1:
-            print("Right column (non-corners):")
-            print(i, j, val)
+            # print("Right column (non-corners):")
+            # print(i, j, val)
             up, down, left, right = get_neighbors_right_column(grid, i, j)
-            print_neighbors(up, down, left, right)
+            # print_neighbors(up, down, left, right)
             live_neighbors = count_neighbors(up, down, left, right)
-            print("live neighbors:", live_neighbors)
+            # print("live neighbors:", live_neighbors)
             next_state = get_next_state(val, live_neighbors)
-            print("next state:", next_state)
+            # print("next state:", next_state)
             new_grid[i, j] = next_state
-            print(new_grid)
+            # print(new_grid)
         else:
-            print("Body:")
-            print(i, j, val)
+            # print("Body:")
+            # print(i, j, val)
             up, down, left, right = get_neighbors_body(grid, i, j)
-            print_neighbors(up, down, left, right)
+            # print_neighbors(up, down, left, right)
             live_neighbors = count_neighbors(up, down, left, right)
-            print("live neighbors:", live_neighbors)
+            # print("live neighbors:", live_neighbors)
             next_state = get_next_state(val, live_neighbors)
-            print("next state:", next_state)
+            # print("next state:", next_state)
             new_grid[i, j] = next_state
-            print(new_grid)
+            # print(new_grid)
+    return(new_grid)
+
+def process_generations(initial_grid, n):
+    current_grid = initial_grid
+    print(current_grid)
+    for i in range(n):
+        print("NEXT N")
+        next_grid = change_grid(current_grid)
+        print(next_grid)
+        current_grid = next_grid
+
+# Create the initial 2-D array with random "live" (1) and "dead" (0) cells.
+# The random sample is generated from elements of a.
+# size is actually the output shape, with row * col samples drawn.
+row = 9
+col = 9
+initial_grid = np.random.choice(a=np.array([0, 1]), size=(row, col))
+# arr = np.array(np.arange(row * col))
+# grid = np.reshape(a=arr, newshape=(row, col))
+# print(grid)
+
+# Create an empty grid to be populated.
+new_grid = np.full(shape=(row, col), fill_value=7)
+# print(new_grid)
+
+process_generations(initial_grid, 3)
 
   
 
