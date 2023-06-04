@@ -103,12 +103,15 @@ def get_neighbors_bottom_left_corner(grid, i, j):
     
     
 def get_neighbors_bottom_right_corner(grid, i, j):
-    live_neighbors = 0
     up = grid[i - 1, j]
+    upper_left = grid[i - 1, j - 1]
     left = grid[i, j - 1]
+    lower_left = grid[0, j - 1]
     down = grid[0, j]
+    lower_right = grid[0, 0]
     right = grid[row - 1, 0]
-    return(up, left, down, right)
+    upper_right = grid[i - 1, 0]
+    return(up, upper_left, left, lower_left, down, lower_right, right, upper_right)
 
 
 def get_neighbors_top_row(grid, i, j):  # consider that i is 0 in the top row...
@@ -209,7 +212,7 @@ def change_grid(grid):
             if j == 0:
                 # print("Bottom-left corner:")
                 # print(i, j, val)
-                up, down, left, right = get_neighbors_bottom_left_corner(grid, i, j)
+                up, upper_left, left, lower_left, down, lower_right, right, upper_right = get_neighbors_bottom_left_corner(grid, i, j)
                 # print_neighbors(up, down, left, right)
                 # live_neighbors = count_neighbors(up, down, left, right)
                 # print("live neighbors:", live_neighbors)
@@ -220,7 +223,7 @@ def change_grid(grid):
             elif j == col - 1:
                 # print("Bottom-right corner:")
                 # print(i, j, val)
-                up, down, left, right = get_neighbors_bottom_right_corner(grid, i, j)
+                up, upper_left, left, lower_left, down, lower_right, right, upper_right = get_neighbors_bottom_right_corner(grid, i, j)
                 # print_neighbors(up, down, left, right)
                 # live_neighbors = count_neighbors(up, down, left, right)
                 # print("live neighbors:", live_neighbors)
@@ -301,7 +304,7 @@ row = 5
 col = 5
 arr = np.array(np.arange(row * col))
 initial_grid = np.reshape(a=arr, newshape=(row, col))
-up, upper_left, left, lower_left, down, lower_right, right, upper_right = get_neighbors_bottom_left_corner(initial_grid, row - 1, 0)
+up, upper_left, left, lower_left, down, lower_right, right, upper_right = get_neighbors_bottom_right_corner(initial_grid, row - 1, col - 1)
 print(initial_grid)
 print_neighbors(up, upper_left, left, lower_left, down, lower_right, right, upper_right)
 # initial_grid=np.array([[1, 0, 0, 1, 1, 0, 1, 1, 1],
