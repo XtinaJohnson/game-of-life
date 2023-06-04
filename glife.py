@@ -71,6 +71,8 @@ def get_neighbors_top_left_corner(grid, i, j):
     return(up, left, down, right)
 
 def get_neighbors_top_right_corner(grid, i, j):
+    # print("In get_neighbors_top_right_corner:")
+    # print(grid)
     live_neighbors = 0
     up = grid[row - 1, j]
     left = grid[i, j - 1]
@@ -140,6 +142,12 @@ def get_neighbors_body(grid, i, j):
 
 def change_grid(grid):
     # np.ndenumerate() gets the index and value of each grid item! Useful.
+    new_grid = np.full(shape=(row, col), fill_value=7)
+    # print("This generation's starting grid:")
+    # print(grid)
+    # print("This generation's new grid (starting point):")
+    # print(new_grid)
+
     for idx, val in np.ndenumerate(grid):
         # print(idx)
         i, j = idx
@@ -148,6 +156,8 @@ def change_grid(grid):
             if j == 0:
                 # print("Top-left corner:")
                 # print(i, j, val)
+                # print("Sending this to get_neighbors_top_left_corner:")
+                # print(grid)
                 up, down, left, right = get_neighbors_top_left_corner(grid, i, j)
                 # print_neighbors(up, down, left, right)
                 live_neighbors = count_neighbors(up, down, left, right)
@@ -160,6 +170,8 @@ def change_grid(grid):
             elif j == col - 1:
                 # print("Top-right corner:")
                 # print(i, j, val)
+                # print("Sending this to get_neighbors_top_right_corner:")
+                # print(grid)
                 up, down, left, right = get_neighbors_top_right_corner(grid, i, j)
                 # print_neighbors(up, down, left, right)
                 live_neighbors = count_neighbors(up, down, left, right)
@@ -167,6 +179,7 @@ def change_grid(grid):
                 next_state = get_next_state(val, live_neighbors)
                 # print("next state:", next_state)
                 new_grid[i, j] = next_state
+                # print("New grid so far:")
                 # print(new_grid)
             else: 
                 # print("Top row (non-corners):")
@@ -250,28 +263,59 @@ def change_grid(grid):
 
 def process_generations(initial_grid, n):
     current_grid = initial_grid
+    print("Initial grid")
     print(current_grid)
     for i in range(n):
-        print("NEXT N")
+        print("Generation", i)
         next_grid = change_grid(current_grid)
+        print("Next grid")
         print(next_grid)
         current_grid = next_grid
+    return(current_grid)
 
 # Create the initial 2-D array with random "live" (1) and "dead" (0) cells.
 # The random sample is generated from elements of a.
 # size is actually the output shape, with row * col samples drawn.
-row = 9
-col = 9
-initial_grid = np.random.choice(a=np.array([0, 1]), size=(row, col))
+# row = 4
+# col = 4
+
+# initial_grid = np.random.choice(a=np.array([0, 1]), size=(row, col))
+# initial_grid=np.array([[1, 0, 0, 1, 1, 0, 1, 1, 1],
+# [1, 1, 0, 0, 0, 1, 1, 1, 1],
+# [1, 0, 1, 1, 0, 0, 1, 0, 0],
+# [0, 0, 1, 0, 0, 0, 1, 0, 1],
+# [0, 0, 1, 0, 1, 1, 1, 0, 1],
+# [1, 1, 0, 1, 0, 0, 1, 0, 1],
+# [1, 1, 0, 0, 1, 0, 1, 0, 0],
+# [0, 1, 1, 1, 0, 0, 0, 1, 1],
+# [0, 0, 1, 0, 0, 0, 0, 0, 1]])
 # arr = np.array(np.arange(row * col))
 # grid = np.reshape(a=arr, newshape=(row, col))
 # print(grid)
 
 # Create an empty grid to be populated.
-new_grid = np.full(shape=(row, col), fill_value=7)
+# new_grid = np.full(shape=(row, col), fill_value=7)
 # print(new_grid)
 
-process_generations(initial_grid, 3)
+# process_generations(initial_grid, 10)
 
   
+block = np.array([[0, 0, 0, 0],
+                  [0, 1, 1, 0],
+                  [0, 1, 1, 0],
+                  [0, 0, 0, 0]])
+
+beehive = np.array([[0, 0, 0, 0, 0, 0],
+                    [0, 0, 1, 1, 0, 0],
+                    [0, 1, 0, 0, 1, 0],
+                    [0, 0, 1, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 0]])
+
+row = 5
+col = 6
+
+def test_still_life():
+    start = process_generations(beehive, 100)
+    end = beehive
+    assert np.array_equal(start, end) 
 
