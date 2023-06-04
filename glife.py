@@ -159,13 +159,15 @@ def get_neighbors_right_column(grid, i, j):
     return(up, upper_left, left, lower_left, down, lower_right, right, upper_right)
 
 def get_neighbors_body(grid, i, j):
-    live_neighbors = 0
     up = grid[i - 1, j]
+    upper_left = grid[i - 1, j - 1]
     left = grid[i, j - 1]
+    lower_left = grid[i + 1, j - 1]
     down = grid[i + 1, j]
+    lower_right = grid[i + 1, j + 1]
     right = grid[i, j + 1]
-    return(up, left, down, right)
-
+    upper_right = grid[i - 1, j + 1]
+    return(up, upper_left, left, lower_left, down, lower_right, right, upper_right)
 
 
 def change_grid(grid):
@@ -278,7 +280,7 @@ def change_grid(grid):
         else:
             # print("Body:")
             # print(i, j, val)
-            up, down, left, right = get_neighbors_body(grid, i, j)
+            up, upper_left, left, lower_left, down, lower_right, right, upper_right = get_neighbors_body(grid, i, j)
             # print_neighbors(up, down, left, right)
             # live_neighbors = count_neighbors(up, down, left, right)
             # print("live neighbors:", live_neighbors)
@@ -315,7 +317,7 @@ row = 5
 col = 5
 arr = np.array(np.arange(row * col))
 initial_grid = np.reshape(a=arr, newshape=(row, col))
-up, upper_left, left, lower_left, down, lower_right, right, upper_right = get_neighbors_right_column(initial_grid, 1, 4)
+up, upper_left, left, lower_left, down, lower_right, right, upper_right = get_neighbors_body(initial_grid, 1, 1)
 print(initial_grid)
 print_neighbors(up, upper_left, left, lower_left, down, lower_right, right, upper_right)
 # initial_grid=np.array([[1, 0, 0, 1, 1, 0, 1, 1, 1],
