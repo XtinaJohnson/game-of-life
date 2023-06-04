@@ -318,9 +318,9 @@ def process_generations(initial_grid, n):
 
 # Random grid
 # Get row, col from .shape
-initial_grid = np.random.choice(a=np.array([0, 1]), size=(10, 10))
-row, col = initial_grid.shape
-process_generations(initial_grid, 10)
+# initial_grid = np.random.choice(a=np.array([0, 1]), size=(10, 10))
+# row, col = initial_grid.shape
+# process_generations(initial_grid, 10)
 
 # arange grid for testing
 # row = 5
@@ -363,9 +363,32 @@ beehive = np.array([[0, 0, 0, 0, 0, 0],
                     [0, 0, 1, 1, 0, 0],
                     [0, 0, 0, 0, 0, 0]])
 
+loaf = np.array([[0, 0, 0, 0, 0, 0],
+                 [0, 0, 1, 1, 0, 0],
+                 [0, 1, 0, 0, 1, 0],
+                 [0, 0, 1, 0, 1, 0],
+                 [0, 0, 0, 1, 0, 0],
+                 [0, 0, 0, 0, 0, 0]])
+
+boat = np.array([[0, 0, 0, 0, 0],
+                 [0, 1, 1, 0, 0],
+                 [0, 1, 0, 1, 0],
+                 [0, 0, 1, 0, 0],
+                 [0, 0, 0, 0, 0]])
+
+tub = np.array([[0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0],
+                [0, 1, 0, 1, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0]])
+
+
+
+row, col = tub.shape
+
 
 def test_still_life():
-    start = process_generations(beehive, 100)
-    end = beehive
+    start = process_generations(tub, 100)
+    end = tub
     assert np.array_equal(start, end) 
 
